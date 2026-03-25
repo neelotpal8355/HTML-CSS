@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Bookstore</title>
+<style>
+    body { font-family: sans-serif; }
+    .main-table { border-collapse: collapse; width: 100%; margin: auto; border: 2px solid black; }
+    .main-table th, .main-table td { border: 1px solid black; padding: 8px; vertical-align: top; }
+    .header-cell { font-family: 'Arial Black', Arial, sans-serif; text-align: center; font-size: 1.5rem; font-weight: bold; padding: 16px; background-color: #f2d4a4; }
+    .logo-cell { text-align: center; vertical-align: middle; background-color: #f2d4a4; width: 150px; font-weight: bold; }
+    .nav-cell { text-align: center; cursor: pointer; font-weight: bold; background-color: #faf0e6; }
+    .nav-cell:hover { background-color: #f2e6d9; }
+    .category-cell { width: 150px; }
+    .category-link { display: block; padding: 4px 8px; cursor: pointer; }
+    .category-link:hover { background-color: #eeeeee; }
+    .content-cell { padding: 0; }
+    .tab-content { padding: 1rem; }
+    .hidden { display: none; }
+    .product-table { width: 100%; border-collapse: collapse; }
+    .product-table td { border: none; padding: 8px; vertical-align: middle; }
+    .form-container { max-width: 28rem; }
+    .form-container div { margin-bottom: 1rem; }
+    .form-container label { display: block; margin-bottom: 0.25rem; }
+    .form-container input, .form-container select, .form-container textarea { width: 100%; padding: 0.5rem; box-sizing: border-box; }
+    .form-container textarea { resize: vertical; height: 60px; }
+    .form-container button, .checkout-btn { padding: 0.5rem 1rem; cursor: pointer; }
+    .product-item img { width: 6rem; height: 8rem; object-fit: contain; }
+    .product-item td { border-bottom: 1px solid black; }
+    .product-price { width: 8rem; text-align: left; font-weight: bold; }
+    .product-action { width: 8rem; text-align: center; }
+    .add-to-cart-btn { background: none; border: none; cursor: pointer; padding: 0; }
+    .add-to-cart-btn img { width: 100px; }
+    .cart-summary { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #cccccc; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+    .cart-table { width: 100%; border-collapse: collapse; }
+    .cart-table th, .cart-table td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    .remove-item-btn { background: #f8d7da; color: #900; border: none; padding: 6px 14px; cursor: pointer; border-radius: 4px; }
+    .remove-item-btn:hover { background: #f5c6cb; }
+</style>
+</head>
+<body>
+<table class="main-table">
+    <tr>
+        <th class="logo-cell">🦁</th>
+        <td class="header-cell" colspan="4"><h2>leo book store</h2></td>
+    </tr>
+    <tr>
+        <td class="nav-cell" data-tab="home">Home</td>
+        <td class="nav-cell" data-tab="login">Login</td>
+        <td class="nav-cell" data-tab="registration">Registration</td>
+        <td class="nav-cell" data-tab="catalogue">Catalogue</td>
+        <td class="nav-cell" data-tab="cart">Cart</td>
+    </tr>
+    <tr>
+        <td class="category-cell">
+            <div class="category-link" data-category="all">All</div>
+            <div class="category-link" data-category="cse">CSE</div>
+            <div class="category-link" data-category="ece">ECE</div>
+            <div class="category-link" data-category="eee">EEE</div>
+            <div class="category-link" data-category="civil">CIVIL</div>
+        </td>
+        <td class="content-cell" colspan="4">
+            <div id="home-content" class="tab-content">
+                <h2>Welcome to leo book store!</h2>
+                <p>Your premier destination for academic and professional books. </p>
+                <p>We specialize in providing a curated selection of textbooks and reference materials for students and professionals in various fields of engineering including Computer Science, Electronics, Electrical, and Civil Engineering.</p>
+            </div>
+            <div id="login-content" class="tab-content hidden">
+                <h2>Login</h2>
+                <form class="form-container">
+                    <div>
+                        <label for="login-email">Email:</label>
+                        <input type="email" id="login-email">
+                    </div>
+                    <div>
+                        <label for="login-password">Password:</label>
+                        <input type="password" id="login-password">
+                    </div>
+                    <button type="submit">Sign In</button>
+                </form>
+            </div>
+            <!-- Registration Content -->
+            <div id="registration-content" class="tab-content hidden">
+                <h2>Create an Account</h2>
+                <form class="form-container" id="registration-form">
+                    <div>
+                        <label for="reg-name">Name:</label>
+                        <input type="text" id="reg-name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="reg-password">Password:</label>
+                        <input type="password" id="reg-password" name="password" required>
+                    </div>
+                    <div>
+                        <label for="reg-email">Email ID:</label>
+                        <input type="email" id="reg-email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="reg-phone">Phone No:</label>
+                        <input type="tel" id="reg-phone" name="phone" pattern="[0-9]{10}" required>
+                    </div>
+                    <div>
+                        <label>Gender:</label>
+                        <input type="radio" id="gender-male" name="gender" value="Male" required>
+                        <label for="gender-male" style="display:inline;">Male</label>
+                        <input type="radio" id="gender-female" name="gender" value="Female">
+                        <label for="gender-female" style="display:inline;">Female</label>
+                    </div>
+                    <div>
+                        <label for="reg-dob">Date of Birth:</label>
+                        <input type="date" id="reg-dob" name="dob" required>
+                    </div>
+                    <div>
+                        <label for="reg-language">Language:</label>
+                        <select id="reg-language" name="language" required>
+                            <option value="">Select Language</option>
+                            <option value="English">English</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="reg-address">Address:</label>
+                        <textarea id="reg-address" name="address" required></textarea>
+                    </div>
+                    <button type="submit">Register</button>
+                </form>
+                <div id="reg-result"></div>
+            </div>
+            <div id="catalogue-content" class="tab-content hidden">
+                <table class="product-table">
+                    <tbody id="product-list">
+                        <!-- Products inserted dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="cart-content" class="tab-content hidden">
+                <h2>Your Shopping Cart</h2>
+                <div id="cart-items-container">
+                    <p>Your cart is empty.</p>
+                </div>
+                <div class="cart-summary">
+                    <div>Total: <span id="cart-total">$0</span></div>
+                    <button class="checkout-btn">Checkout</button>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const mainContainer = document.querySelector('.main-table');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const productList = document.getElementById('product-list');
+    const cartItemsContainer = document.getElementById('cart-items-container');
+    const cartTotalElement = document.getElementById('cart-total');
+    const catalogueContent = document.getElementById('catalogue-content');
+    let cart = [];
+    const products = [
+        { id: 1, category: 'cse', name: 'XMLBible', author: 'Elliote Rusty Harold', publication: 'Wiely', price: 40.5, image: 'https://m.media-amazon.com/images/I/516RaKSnC6L._UF350,350_QL50_.jpg', placeholder: 'XML+Bible' },
+        { id: 2, category: 'cse', name: 'AI', author: 'S.Russel', publication: 'Princetonhall', price: 63, image: 'https://m.media-amazon.com/images/I/61-6TTTBZeL.jpg', placeholder: 'AI' },
+        { id: 3, category: 'ece', name: 'Digital Design', author: 'M. Morris Mano', publication: 'Pearson', price: 55.25, image: 'https://m.media-amazon.com/images/I/51UWrJBa97L._UF1000,1000_QL80_.jpg', placeholder: 'Digital+Design' },
+        { id: 4, category: 'civil', name: 'Structural Analysis', author: 'R. C. Hibbeler', publication: 'Prentice Hall', price: 72, image: 'https://m.media-amazon.com/images/I/51AXTSfNRfL._UF1000,1000_QL80_.jpg', placeholder: 'Structural+Analysis' }
+    ];
+    function renderProducts(filterCategory = 'all') {
+        const productsToRender = filterCategory === 'all'
+            ? products
+            : products.filter(p => p.category === filterCategory);
+        if (productsToRender.length === 0) {
+            productList.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 1rem;">No books found in this category.</td></tr>';
+            return;
+        }
+        productList.innerHTML = productsToRender.map(product => `
+            <tr class="product-item">
+                <td><img src="${product.image}" alt="Book: ${product.name}" onerror="this.onerror=null;this.src='https://placehold.co/96x128/e2e8f0/333?text=${product.placeholder}';"></td>
+                <td>
+                    <p><b>Book:</b> ${product.name}</p>
+                    <p><b>Author:</b> ${product.author}</p>
+                    <p><b>Publication:</b> ${product.publication}</p>
+                </td>
+                <td class="product-price">$${product.price}</td>
+                <td class="product-action">
+                    <button class="add-to-cart-btn" data-id="${product.id}">
+                        <img src="https://cdn-icons-png.flaticon.com/128/1170/1170678.png" alt="Add to cart">
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+    }
+    function updateCartUI() {
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+        } else {
+            cartItemsContainer.innerHTML = `
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${cart.map(item => `
+                            <tr>
+                                <td>${item.name}</td>
+                                <td>$${item.price}</td>
+                                <td>${item.quantity}</td>
+                                <td>$${(item.price * item.quantity).toFixed(2)}</td>
+                                <td>
+                                    <button class="remove-item-btn" data-id="${item.id}">Remove</button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartTotalElement.textContent = `$${total.toFixed(2)}`;
+    }
+    mainContainer.addEventListener('click', (e) => {
+        const target = e.target;
+        const navCell = target.closest('.nav-cell');
+        if (navCell) {
+            const tab = navCell.dataset.tab;
+            const tabIdToShow = `${tab}-content`;
+            tabContents.forEach(content => {
+                content.classList.toggle('hidden', content.id !== tabIdToShow);
+            });
+            if (tab === 'catalogue') {
+                renderProducts('all');
+            }
+            return;
+        }
+        const categoryLink = target.closest('.category-link');
+        if (categoryLink) {
+            const category = categoryLink.dataset.category;
+            renderProducts(category);
+            tabContents.forEach(content => content.classList.add('hidden'));
+            catalogueContent.classList.remove('hidden');
+            return;
+        }
+        const addToCartButton = target.closest('.add-to-cart-btn');
+        if (addToCartButton) {
+            const productId = parseInt(addToCartButton.dataset.id, 10);
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCartUI();
+            return;
+        }
+        if (target.classList.contains('remove-item-btn')) {
+            const itemId = parseInt(target.dataset.id, 10);
+            cart = cart.filter(item => item.id !== itemId);
+            updateCartUI();
+            return;
+        }
+    });
+    // Registration form submit
+    const regForm = document.getElementById('registration-form');
+    if (regForm) {
+        regForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            let summary = `<h3>Registration Details</h3><ul>`;
+            summary += `<li><b>Name:</b> ${form.name.value}</li>`;
+            summary += `<li><b>Password:</b> ${form.password.value}</li>`;
+            summary += `<li><b>Email:</b> ${form.email.value}</li>`;
+            summary += `<li><b>Phone:</b> ${form.phone.value}</li>`;
+            summary += `<li><b>Gender:</b> ${form.gender.value}</li>`;
+            summary += `<li><b>Date of Birth:</b> ${form.dob.value}</li>`;
+            summary += `<li><b>Language:</b> ${form.language.value}</li>`;
+            summary += `<li><b>Address:</b> ${form.address.value}</li></ul>`;
+            document.getElementById('reg-result').innerHTML = summary;
+            regForm.reset();
+        });
+    }
+    function init() {
+        renderProducts();
+        updateCartUI();
+    }
+    init();
+});
+</script>
+</body>
+</html>

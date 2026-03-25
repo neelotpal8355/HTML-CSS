@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+}
+#main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: normal;
+}
+.shape:hover {
+    margin-left: 10px; margin-top: 10px;
+    width: 200px;
+    height: 200px;
+    border: 1px solid rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* #square:hover {
+    background-color: rgb(245, 13, 13);
+}
+#circle:hover {
+    background-color: rgb(13, 245, 13);
+} 
+#dimond:hover {
+    background-color: rgb(13, 13, 245);
+} */
+#circle{
+    background: green;
+    border-radius: 50%;
+}
+#dimond{
+    background: blue;
+    height: 141px;
+    width: 141px;
+    margin: 50px;
+    rotate: 45deg;
+}
+#square {
+    background: red;
+}
+
+#dimond h1 {
+    color: white;
+    transform: rotate(-45deg);
+}

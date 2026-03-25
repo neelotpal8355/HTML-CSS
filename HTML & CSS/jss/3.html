@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LEO BOOK STORE</title>
+<script>
+const style = document.createElement('style');
+style.innerHTML = `
+    body {
+      background-color: #cf8782;
+      margin: 0;
+      padding: 0;
+    }
+    table.bookstore-table {
+      margin: 50px auto;
+      border-collapse: collapse;
+      width: 80%;
+    }
+    th, td {
+      border: 2px solid #e7b98b;
+      padding: 18px 12px;
+      text-align: left;
+    }
+    th.header-yellow, td.header-yellow {
+      background-color: #FFFFE0 !important;
+    }
+    td:not(.header-yellow) {
+      background-color: #fff;
+    }
+    .dept {
+      font-weight: bold;
+      font-size: 1.2em;
+      background-color: #fff;
+    }
+    .cover-img {
+      width: 56px;
+      height: auto;
+      vertical-align: middle;
+      border-radius: 6px;
+      box-shadow: 1px 1px 7px #ccc;
+      background: #fff;
+    }
+    .book-title {
+      font-weight: bold;
+    }
+    .price {
+      font-weight: bold;
+    }
+    .cart-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5em;
+      color: #bba253;
+    }
+`;
+document.head.appendChild(style);
+</script>
+</head>
+<body>
+<table class="bookstore-table">
+  <tr>
+    <th class="header-yellow">🦁</th>
+    <th colspan="4" class="header-yellow">LEO BOOK STORE</th>
+  </tr>
+  <tr>
+    <th class="header-yellow">Home</th>
+    <th class="header-yellow">Cover</th>
+    <th class="header-yellow">Details</th>
+    <th class="header-yellow">Price</th>
+    <th class="header-yellow">Add</th>
+  </tr>
+  <tr>
+    <td class="dept">CSE</td>
+    <td align="center">
+      <img src="https://m.media-amazon.com/images/I/61ZYxrQEpCL._UF1000,1000_QL80_.jpg" alt="Introduction to Algorithms" class="cover-img">
+    </td>
+    <td>
+      Book: <span class="book-title">Introduction to Algorithms</span><br>
+      Author: Cormen et al.<br>
+      Publication: MIT Press
+    </td>
+    <td class="price">$40.5</td>
+    <td align="center"><button class="cart-btn">&#128722;</button></td>
+  </tr>
+  <tr>
+    <td class="dept">ECE</td>
+    <td align="center">
+      <img src="https://m.media-amazon.com/images/I/91ot-mprNfL._UF1000,1000_QL80_.jpg" alt="Digital Signal Processing Book Cover" class="cover-img">
+    </td>
+    <td>
+      Book: <span class="book-title">Digital Signal Processing</span><br>
+      Author: Proakis<br>
+      Publication: Pearson
+    </td>
+    <td class="price">$55.00</td>
+    <td align="center"><button class="cart-btn">&#128722;</button></td>
+  </tr>
+  <tr>
+    <td class="dept">EEE</td>
+    <td align="center">
+      <img src="https://m.media-amazon.com/images/I/61rc0RQeoEL.jpg" alt="Electrical Engineering Fundamentals Book Cover" class="cover-img">
+    </td>
+    <td>
+      Book: <span class="book-title">Electrical Engineering Fundamentals</span><br>
+      Author: Vincent Del Toro<br>
+      Publication: McGraw-Hill
+    </td>
+    <td class="price">$63.00</td>
+    <td align="center"><button class="cart-btn">&#128722;</button></td>
+  </tr>
+  <tr>
+    <td class="dept">CIVIL</td>
+    <td align="center">
+      <img src="https://m.media-amazon.com/images/I/715r9fuh0tL._UF1000,1000_QL80_.jpg" alt="Civil Engineering Reference Manual Book Cover" class="cover-img">
+    </td>
+    <td>
+      Book: <span class="book-title">Civil Engineering Reference Manual</span><br>
+      Author: Michael R. Lindeburg<br>
+      Publication: Professional Pub
+    </td>
+    <td class="price">$38.60</td>
+    <td align="center"><button class="cart-btn">&#128722;</button></td>
+  </tr>
+</table>
+</body>
+</html>

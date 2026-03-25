@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LEO BOOK STORE</title>
+    <script>
+      const style = document.createElement('style');
+      style.innerHTML = `
+        body {
+          background-color: #cf8782;
+          margin: 0;
+          padding: 0;
+        }
+        table {
+          margin: 50px auto;
+          border-collapse: collapse;
+          width: 80%;
+        }
+        th, td {
+          border: 2px solid #e7b98b;
+          padding: 18px 12px;
+          text-align: left;
+        }
+        th {
+          background-color: #fde7b3;
+          font-size: 1.18em;
+        }
+        tr:first-child th {
+          font-size: 2em;
+          text-align: center;
+          background-color: #fde7b3;
+        }
+        td {
+          background-color: #fff9f5;
+        }
+        .dept {
+          font-weight: bold;
+          font-size: 1.2em;
+        }
+        .desc-big-cell {
+          text-align: center;
+          font-size: 1.5em;
+          background-color: #fff9f5;
+          vertical-align: middle;
+        }
+      `;
+      document.head.appendChild(style);
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>🦁</th>
+            <th colspan="4">LEO BOOK STORE</th>
+        </tr>
+        <tr>
+            <th>Home</th>
+            <th>Cover</th>
+            <th>Details</th>
+            <th>Price</th>
+            <th>Add</th>
+        </tr>
+        <tr>
+            <td class="dept">CSE</td>
+            <td class="desc-big-cell" colspan="4" rowspan="4">Description of the Website</td>
+        </tr>
+        <tr>
+            <td class="dept">ECE</td>
+        </tr>
+        <tr>
+            <td class="dept">EEE</td>
+        </tr>
+        <tr>
+            <td class="dept">CIVIL</td>
+        </tr>
+    </table>
+</body>
+</html>
