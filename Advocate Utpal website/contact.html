@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Utpal Sharma | Advocate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Open+Sans:wght300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- EmailJS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #faf7f2;
+            color: #2c3e50;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: #2c3e50;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #c19a6b;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .logo span {
+            display: block;
+            font-size: 12px;
+            color: #c19a6b;
+            letter-spacing: 2px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #c19a6b;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 120px auto 40px;
+            padding: 0 20px;
+        }
+        
+        /* Contact Card */
+        .contact-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            padding: 40px;
+            border: 1px solid #e8d9c5;
+        }
+        
+        .contact-header {
+            margin-bottom: 40px;
+            border-bottom: 2px solid #c19a6b;
+            padding-bottom: 20px;
+        }
+        
+        .contact-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .contact-header p {
+            color: #8b5a2b;
+            font-size: 18px;
+        }
+        
+        .contact-row {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .info-section {
+            margin-bottom: 35px;
+        }
+        
+        .info-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-left: 3px solid #c19a6b;
+            padding-left: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #faf7f2;
+            border-radius: 8px;
+        }
+        
+        .info-item i {
+            width: 25px;
+            color: #c19a6b;
+            font-size: 18px;
+        }
+        
+        .info-item span,
+        .info-item a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        
+        .info-item a:hover {
+            color: #c19a6b;
+        }
+        
+        .timing-box {
+            background: #faf7f2;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .timing-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .timing-row i {
+            color: #c19a6b;
+            width: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e8d9c5;
+            background: #faf7f2;
+            border-radius: 6px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #c19a6b;
+            background: white;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #8b5a2b;
+        }
+        
+        /* Status Message */
+        .status-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .status-message.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-message.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+            border-top: 2px solid #c19a6b;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-container p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .social-links a {
+            color: white;
+            margin-left: 20px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #c19a6b;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .contact-row {
+                flex-direction: column;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .social-links a {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                UTPAL SHARMA
+                <span>ADVOCATE</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="contact-card">
+            <div class="contact-header">
+                <h1>Contact</h1>
+                <p>Get in touch for legal consultation</p>
+            </div>
+            
+            <div class="contact-row">
+                <!-- Left Column - Contact Information -->
+                <div class="contact-info">
+                    <div class="info-section">
+                        <h3>Office Hours</h3>
+                        <div class="timing-box">
+                            <div class="timing-row">
+                                <i class="fas fa-clock"></i>
+                                <span>Monday - Saturday: 10:00 AM - 6:00 PM</span>
+                            </div>
+                            <div class="timing-row">
+                                <i class="fas fa-clock"></i>
+                                <span>Sunday: By appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3>Contact Details</h3>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 63882 93703</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>sharmautpal766530@gmail.com</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3>Address</h3>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>A-35, East of Kailash, New Delhi - 110065</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3>Follow</h3>
+                        <div class="info-item">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="https://linkedin.com/in/sharmautpal" target="_blank">linkedin.com/in/sharmautpal</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Contact Form -->
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label>Your Name *</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Your Email *</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Your Message *</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+                    </form>
+                    <div id="statusMessage" class="status-message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <p>© 2026 Utpal Sharma, Advocate. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/sharmautpal"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:sharmautpal766530@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Check if disclaimer was accepted
+        if (localStorage.getItem('disclaimerAccepted') !== 'true') {
+            window.location.href = 'index.html';
+        }
+
+        // Initialize EmailJS with your Public Key
+        emailjs.init("RxDyUQnX1IeatEHDT");
+
+        // Contact form handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show sending state
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // Get form values
+            const templateParams = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value || 'Not provided',
+                message: document.getElementById('message').value
+            };
+
+            // Send email using EmailJS
+            emailjs.send('service_y5yoc53', 'template_n49zthu', templateParams)
+                .then(function(response) {
+                    // Success message
+                    document.getElementById('statusMessage').className = 'status-message success';
+                    document.getElementById('statusMessage').innerHTML = '✓ Message sent successfully! We will contact you soon.';
+                    
+                    // Reset form
+                    document.getElementById('contactForm').reset();
+                    
+                    // Reset button
+                    submitBtn.innerText = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(function() {
+                        document.getElementById('statusMessage').style.display = 'none';
+                    }, 5000);
+                })
+                .catch(function(error) {
+                    // Error message
+                    document.getElementById('statusMessage').className = 'status-message error';
+                    document.getElementById('statusMessage').innerHTML = '✗ Failed to send. Please try again or call directly.';
+                    
+                    // Reset button
+                    submitBtn.innerText = originalText;
+                    submitBtn.disabled = false;
+                    
+                    console.log('EmailJS Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>
